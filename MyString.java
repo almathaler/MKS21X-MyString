@@ -1,18 +1,33 @@
 public class MyString implements CharSequence, Comparable<CharSequence>{
 	public static void main(String[] args){
-		MyString tester = new MyString("hello");
-		System.out.println("tester: " + tester);
-		System.out.println("Length of tester (expect 5): " + tester.length());
-		System.out.println("Get each character individually? (expect 'h', 'e', 'l', 'l', 'o')");
-		for (int k = 0; k<tester.length()-1; k++) {
-			System.out.print(tester.charAt(k) + ", ");
+		try {
+			MyString tester = new MyString("hello");
+			System.out.println("tester: " + tester);
+			System.out.println("Length of tester (expect 5): " + tester.length());
+			System.out.println("Get each character individually? (expect 'h', 'e', 'l', 'l', 'o')");
+			for (int k = 0; k<tester.length()-1; k++) {
+				System.out.print(tester.charAt(k) + ", ");
+			}
+			System.out.print(tester.charAt(tester.length()-1) + "\n");
+			System.out.println("Get subsequences?");
+			for (int k = 0; k<tester.length()+1; k++){
+				System.out.println(tester.subSequence(0,k) + " (from: " + 0 + " to: " + k + ")");
+			}
+			System.out.println("Testing errors");
+			System.out.println("When index for charAt is negative: ");
+			//System.out.println(tester.charAt(-1));
+			System.out.println("When index for charAt is greater than length: ");
+			//System.out.println(tester.charAt(tester.length()));
+			System.out.println("When start is less than 0, end less than 0, end less than start, end greater than tester.length(): ");
+			//System.out.println(tester.subSequence(-1, 1));
+			//System.out.println(tester.subSequence(-4, -1));
+			//System.out.println(tester.subSequence(4, 2));
+			//System.out.println(tester.subSequence(4, 6));
+		}catch(IndexOutOfBoundsException e){
+			System.out.println(e);
+		}catch(NullPointerException e){
+			System.out.println(e);
 		}
-		System.out.print(tester.charAt(tester.length()-1) + "\n");
-		System.out.println("Get subsequences?");
-		for (int k = 0; k<tester.length()+1; k++){
-			System.out.println(tester.subSequence(0,k) + " (from: " + 0 + " to: " + k + ")");
-		}
-
 	}
 	private char[] data;
 	public MyString(CharSequence s){
@@ -32,7 +47,7 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 	}
 	public CharSequence subSequence(int start, int end){
 		if (start < 0 || end < 0 || end > this.length() || start > end) {
-			throw new IndexOutOfBoundsException("index fo subSequence of out bounds");
+			throw new IndexOutOfBoundsException("index for subSequence of out bounds");
 		}
 		String toReturn = "";
 		for (int i = start; i<end; i++){
