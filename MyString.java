@@ -1,7 +1,7 @@
 public class MyString implements CharSequence, Comparable<CharSequence>{
 	public static void main(String[] args){
 		try {
-			System.out.println("FIRST TEST: IF 0 IS PRODUCED, OK: " + "ad".compareTo("bc"));
+			//System.out.println("FIRST TEST: IF 0 IS PRODUCED, OK: " + "ad".compareTo("bc"));
 			MyString tester = new MyString("hello");
 			System.out.println("tester: " + tester);
 			System.out.println("Length of tester (expect 5): " + tester.length());
@@ -37,6 +37,7 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 			System.out.println("Wb " + other2 + " and " + tester2 + "? (expect opposite of previous): " + other2.compareTo(tester2));
 			System.out.println("Is compareTo transitive?");
 			MyString another = new MyString("goodbye");
+			/*
 			//System.out.println("tester: " + tester + " other: " + other + " another: " + another);
 			System.out.println(other + ".compareTo(" + tester + ") equals: " + other.compareTo(tester));
 			System.out.println(another + ".compareTo(" + other + ") equals: " + another.compareTo(other));
@@ -45,6 +46,7 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 			System.out.println(tester + ".compareTo(" + other + ") equals: " + tester.compareTo(other));
 			System.out.println(other + ".compareTo(" + another + ") equals: " + other.compareTo(another));
 			System.out.println(tester + ".compareTo(" + another + ") equals: " + tester.compareTo(another));
+			*/
 			System.out.println("Can we show two MyStrings are the same with compareTo?");
 			MyString same1  = new MyString("abcdef");
 			MyString same2  = new MyString("abcdef");
@@ -95,11 +97,38 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 		}
 		return toReturn;
 	}
+	//MADE AN EDIT -- LENGTH SHOULDN'T COME INTO IT UNLESS ITS AAA VS AAAA -- LOOK AT DOC
 	public int compareTo(CharSequence o){
 		if (o == null) {
 			throw new NullPointerException("parameter is null");
 		}
 		int toReturn = 0;
+		if (o.length() > this.length()) {
+			for (int i = 0; i<this.length(); i++){
+				if (this.charAt(i) != o.charAt(i)){
+					toReturn = this.charAt(i) - o.charAt(i);
+					i = this.length();
+				}
+			}
+		}
+		else {
+			for (int i = 0; i<o.length(); i++){
+				if (this.charAt(i) != o.charAt(i)){
+					toReturn = this.charAt(i) - o.charAt(i);
+					i = this.length();
+				}
+			}
+		}
+		if (toReturn == 0){
+			toReturn = this.length() - o.length();
+		}
+		return toReturn;
+	}
+
+
+
+
+		/*
 		if (o.length() == this.length()) {
 			for(int i = 0; i < o.length(); i++){
 				if (o.charAt(i) == this.charAt(i)){
@@ -130,4 +159,5 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 		}
 		return toReturn;
 	}
+	*/
 }
