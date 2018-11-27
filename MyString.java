@@ -3,13 +3,20 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
 		try {
 			//System.out.println("FIRST TEST: IF 0 IS PRODUCED, OK: " + "ad".compareTo("bc"));
 			MyString tester = new MyString("hello");
+			MyString mSTester = tester;
 			System.out.println("tester: " + tester);
-			System.out.println("Length of tester (expect 5): " + tester.length());
+			System.out.println("mSTester: " + mSTester);
+			System.out.println("Length of tester (expect 5): " + tester.length() + " of mSTESter: " + mSTester.length());
 			System.out.println("Get each character individually? (expect 'h', 'e', 'l', 'l', 'o')");
 			for (int k = 0; k<tester.length()-1; k++) {
 				System.out.print(tester.charAt(k) + ", ");
 			}
 			System.out.print(tester.charAt(tester.length()-1) + "\n");
+			System.out.println("Get each character of mSTester individually? (expect 'h', 'e', 'l', 'l', 'o')");
+			for (int k = 0; k<mSTester.length()-1; k++) {
+				System.out.print(mSTester.charAt(k) + ", ");
+			}
+			System.out.print(tester.charAt(mSTester.length()-1) + "\n");
 			System.out.println("Get subsequences?");
 			for (int k = 0; k<tester.length()+1; k++){
 				System.out.println(tester.subSequence(0,k) + " (from: " + 0 + " to: " + k + ")");
